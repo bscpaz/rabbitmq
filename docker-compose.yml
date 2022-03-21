@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    container_name: rabbitmq
+    environment: 
+      RABBITMQ_ERLANG_COOKIE: "MCYAKUHEMPSPHHSGWFVM"
+      RABBITMQ_DEFAULT_USER: "bscpaz"
+      RABBITMQ_DEFAULT_PASS: "bscpaz"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
