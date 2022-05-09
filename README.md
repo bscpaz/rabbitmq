@@ -21,3 +21,13 @@ _A fanout exchange routes messages to all of the queues that are bound to it and
 
 #### Direct Exchange
 _A direct exchange delivers messages to queues based on the message routing key. A direct exchange is ideal for the unicast routing of messages._
+
+#### Ports:
+- 15672: for user interface (web).
+- 5672: for system connections.
+
+#### Virtual Host:
+Parameter: RABBITMQ_DEFAULT_VHOST
+This name is not related to Virtual Hosts that we usually know, but this is a way to separate contexts on RabbitMQ. 
+
+
