@@ -35,4 +35,8 @@ This name is not related to Virtual Hosts that we usually know, but this is a wa
 rabbitmq-diagnostics status
 ```
 
+It is possible to print effective configuration (user provided values from all configuration files merged into defaults) using the rabbitmq-diagnostics environment command:
+```shell
+rabbitmq-diagnostics environment
+```
 
