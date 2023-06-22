@@ -30,4 +30,9 @@ _A direct exchange delivers messages to queues based on the message routing key.
 Parameter: RABBITMQ_DEFAULT_VHOST
 This name is not related to Virtual Hosts that we usually know, but this is a way to separate contexts on RabbitMQ. 
 
+#### Use the rabbitmq-diagnostics status command
+```shell
+rabbitmq-diagnostics status
+```
+
 
