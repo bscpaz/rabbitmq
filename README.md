@@ -40,3 +40,7 @@ It is possible to print effective configuration (user provided values from all c
 rabbitmq-diagnostics environment
 ```
 
+#### To generate a hash password
+```shell
+rabbitmqctl hash_password <your password>
+```
