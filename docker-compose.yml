@@ -1,14 +1,61 @@
-version: '3'
+version: '3.8'
 
 services:
-  rabbitmq:
-    image: "rabbitmq:3-management"
-    container_name: rabbitmq
-    environment: 
-      RABBITMQ_ERLANG_COOKIE: "MCYAKUHEMPSPHHSGWFVM"
-      RABBITMQ_DEFAULT_USER: "bscpaz"
-      RABBITMQ_DEFAULT_PASS: "bscpaz"
-      RABBITMQ_DEFAULT_VHOST: "/"
+
+  rabbitmq_01:
+    container_name: srvmens01
+    hostname: srvmens01
+    image: "rabbitmq:3.12-management"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "CYAKUHEMPSPHHSGWFV"
+      RABBITMQ_NODENAME: "rabbit1"
+    volumes:
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/conf.d/definitions.json
+      - ./rabbitmq-01/rabbitmq.conf:/etc/rabbitmq/conf.d/rabbitmq.conf
+    networks:
+      - sirea-network
     ports:
-      - "15672:15672"
-      - "5672:5672"
+     - "4369:4369"
+     - "5671:5671"
+     - "5672:5672"
+     - "15671:15671"
+     - "15672:15672"
+     - "25672:25672"
+
+  rabbitmq_02:
+    container_name: srvmens02
+    hostname: srvmens02
+    image: "rabbitmq:3.12-management"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "CYAKUHEMPSPHHSGWFV"
+      RABBITMQ_NODENAME: "rabbit2"
+    volumes:
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/conf.d/definitions.json
+      - ./rabbitmq-02/rabbitmq.conf:/etc/rabbitmq/conf.d/rabbitmq.conf
+    networks:
+      - sirea-network
+    ports:
+      - "15673:15672"
+    depends_on:
+      - rabbitmq_01
+
+  rabbitmq_03:
+    container_name: srvmens03
+    hostname: srvmens03
+    image: "rabbitmq:3.12-management"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "CYAKUHEMPSPHHSGWFV"
+      RABBITMQ_NODENAME: "rabbit3"
+    volumes:
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/conf.d/definitions.json
+      - ./rabbitmq-03/rabbitmq.conf:/etc/rabbitmq/conf.d/rabbitmq.conf
+    networks:
+      - sirea-network
+    ports:
+      - "15674:15672"
+    depends_on:
+      - rabbitmq_01
+
+networks:
+  sirea-network:
+    driver: bridge
