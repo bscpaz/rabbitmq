@@ -5,13 +5,12 @@ services:
   rabbitmq_01:
     container_name: srvmens01
     hostname: srvmens01
-    image: "rabbitmq:3.12-management"
+    build:
+      context: ./rabbitmq-01
+      dockerfile: Dockerfile.yml    
     environment:
-      RABBITMQ_ERLANG_COOKIE: "CYAKUHEMPSPHHSGWFV"
+      RABBITMQ_ERLANG_COOKIE: "NCYAKUHEMPSPHHSGWFVN"
       RABBITMQ_NODENAME: "rabbit1"
-    volumes:
-      - ./rabbitmq/definitions.json:/etc/rabbitmq/conf.d/definitions.json
-      - ./rabbitmq-01/rabbitmq.conf:/etc/rabbitmq/conf.d/rabbitmq.conf
     networks:
       - app-network
     ports:
@@ -25,13 +24,12 @@ services:
   rabbitmq_02:
     container_name: srvmens02
     hostname: srvmens02
-    image: "rabbitmq:3.12-management"
+    build:
+      context: ./rabbitmq-02
+      dockerfile: Dockerfile.yml    
     environment:
-      RABBITMQ_ERLANG_COOKIE: "CYAKUHEMPSPHHSGWFV"
+      RABBITMQ_ERLANG_COOKIE: "NCYAKUHEMPSPHHSGWFVN"
       RABBITMQ_NODENAME: "rabbit2"
-    volumes:
-      - ./rabbitmq/definitions.json:/etc/rabbitmq/conf.d/definitions.json
-      - ./rabbitmq-02/rabbitmq.conf:/etc/rabbitmq/conf.d/rabbitmq.conf
     networks:
       - app-network
     ports:
@@ -42,13 +40,12 @@ services:
   rabbitmq_03:
     container_name: srvmens03
     hostname: srvmens03
-    image: "rabbitmq:3.12-management"
+    build:
+      context: ./rabbitmq-03
+      dockerfile: Dockerfile.yml
     environment:
-      RABBITMQ_ERLANG_COOKIE: "CYAKUHEMPSPHHSGWFV"
+      RABBITMQ_ERLANG_COOKIE: "NCYAKUHEMPSPHHSGWFVN"
       RABBITMQ_NODENAME: "rabbit3"
-    volumes:
-      - ./rabbitmq/definitions.json:/etc/rabbitmq/conf.d/definitions.json
-      - ./rabbitmq-03/rabbitmq.conf:/etc/rabbitmq/conf.d/rabbitmq.conf
     networks:
       - app-network
     ports:
