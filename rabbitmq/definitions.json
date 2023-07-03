@@ -86,7 +86,7 @@
       "source": "justice.v1.documents",
       "destination" : "justice.v1.documents.document-signed",
       "destination_type" : "queue",
-      "routing_key": "envio.app.#",
+      "routing_key": "document-signed.#",
       "arguments": {}
     },
     {
