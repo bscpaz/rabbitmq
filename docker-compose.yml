@@ -6,8 +6,8 @@ services:
     container_name: srvmens01
     hostname: srvmens01
     build:
-      context: ./rabbitmq-01
-      dockerfile: Dockerfile.yml    
+      context: .
+      dockerfile: ./rabbitmq-01/Dockerfile.yml    
     environment:
       RABBITMQ_ERLANG_COOKIE: "NCYAKUHEMPSPHHSGWFVN"
       RABBITMQ_NODENAME: "rabbit1"
@@ -25,8 +25,8 @@ services:
     container_name: srvmens02
     hostname: srvmens02
     build:
-      context: ./rabbitmq-02
-      dockerfile: Dockerfile.yml    
+      context: .
+      dockerfile: ./rabbitmq-02/Dockerfile.yml      
     environment:
       RABBITMQ_ERLANG_COOKIE: "NCYAKUHEMPSPHHSGWFVN"
       RABBITMQ_NODENAME: "rabbit2"
@@ -41,8 +41,8 @@ services:
     container_name: srvmens03
     hostname: srvmens03
     build:
-      context: ./rabbitmq-03
-      dockerfile: Dockerfile.yml
+      context: .
+      dockerfile: ./rabbitmq-03/Dockerfile.yml    
     environment:
       RABBITMQ_ERLANG_COOKIE: "NCYAKUHEMPSPHHSGWFVN"
       RABBITMQ_NODENAME: "rabbit3"

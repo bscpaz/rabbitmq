@@ -10,13 +10,13 @@
   ],
   "vhosts": [
     {
-      "name": "env_prd"
+      "name": "app_prd"
     }
   ],
   "permissions" : [
     {
       "user": "bscpaz",
-      "vhost": "env_prd",
+      "vhost": "app_prd",
       "configure": ".*",
       "write" : ".*",
       "read" : ".*"
@@ -25,7 +25,7 @@
   "parameters": [],
   "policies": [
     {
-      "vhost": "env_prd",
+      "vhost": "app_prd",
       "name": "ha",
       "pattern": "",
       "definition": {
@@ -38,7 +38,7 @@
   "exchanges": [
     {
       "name": "app.exchange",
-      "vhost": "env_prd",
+      "vhost": "app_prd",
       "type": "topic",
       "durable": true,
       "auto_delete": false,
@@ -49,14 +49,14 @@
   "queues": [
     {
       "name": "envio.app.queue",
-      "vhost" : "env_prd",
+      "vhost" : "app_prd",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "retorno.app.queue",
-      "vhost" : "env_prd",
+      "vhost" : "app_prd",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
@@ -64,7 +64,7 @@
   ],
   "bindings": [
     {
-      "vhost": "env_prd",
+      "vhost": "app_prd",
       "source": "app.exchange",
       "destination" : "envio.app.queue",
       "destination_type" : "queue",
@@ -72,7 +72,7 @@
       "arguments": {}
     },
     {
-      "vhost": "env_prd",
+      "vhost": "app_prd",
       "source": "app.exchange",
       "destination" : "retorno.app.queue",
       "destination_type" : "queue",
