@@ -1,6 +1,0 @@
-FROM rabbitmq:3.12-management
-
-RUN rm -frv /etc/rabbitmq/conf.d/10-defaults.conf
-COPY ../rabbitmq/rabbitmq.conf /etc/rabbitmq/conf.d/rabbitmq.conf
-COPY ../rabbitmq/rabbitmq-cluster.conf /etc/rabbitmq/conf.d/rabbitmq-cluster.conf
-COPY ../rabbitmq/definitions.json /etc/rabbitmq/conf.d/definitions.json
