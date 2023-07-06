@@ -23,7 +23,7 @@ _A fanout exchange routes messages to all of the queues that are bound to it and
 _A direct exchange delivers messages to queues based on the message routing key. A direct exchange is ideal for the unicast routing of messages._
 
 ### Ensuring delivery guarantee
-When it comes to ensuring delivery guarantee, never work with auto ack = true when we want to ensure resilience in our systems.
+When it comes to ensuring guaranteed delivery, it is crucial not to rely on auto ack = true if we aim to ensure resilience in our systems.
 
 To set the auto ack = false configuration, you need to do it in the consumer's code. For exemple:
 
