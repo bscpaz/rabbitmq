@@ -1,4 +1,4 @@
-package br.com.bscpaz.publisher.utils;
+package br.com.bscpaz.publisher.controllers.utils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
