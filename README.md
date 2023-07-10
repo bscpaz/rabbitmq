@@ -22,6 +22,60 @@ _A fanout exchange routes messages to all of the queues that are bound to it and
 #### Direct Exchange
 _A direct exchange delivers messages to queues based on the message routing key. A direct exchange is ideal for the unicast routing of messages._
 
+### Ensuring delivery guarantee
+When it comes to ensuring guaranteed delivery, it is crucial not to rely on auto ack = true if we aim to ensure resilience in our systems.
+
+To set the auto ack = false configuration, you need to do it in the consumer's code. For exemple:
+
+```java
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class RabbitMQConfig {
+
+    @Bean
+    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setAutoAck(false); // <<<< Desable auto ack
+        return factory;
+    }
+}
+```
+
+```java
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Component;
+
+@Component
+public class RabbitMQConsumer {
+
+    @RabbitListener(queues = "queue_name", containerFactory = "rabbitListenerContainerFactory")
+    public void consumeMessage(Message message) {
+        try {
+            String messageBody = new String(message.getBody(), "UTF-8");
+            
+            // Some logic
+            
+            // Manually acknowledge
+            message.getMessageProperties().getChannel().basicAck(message.getMessageProperties().getDeliveryTag(), false);
+        } catch (Exception ex) {
+            // Deal with the exception
+            
+            // Reject (nack) the mensagem manually with a requeue.
+            //message.getMessageProperties().getChannel().basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
+
+            //Or send it to a DLX (Dead Letter Exchange)
+            //rabbitTemplate.send("queue_name_dlq", message);
+        }
+    }
+}
+```
+
 #### Ports:
 - 15672: for user interface (web).
 - 5672: for system connections.
