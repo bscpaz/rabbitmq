@@ -1,4 +1,4 @@
-package br.com.bscpaz.publisher.controllers.v1.dtos;
+package br.com.bscpaz.publisher.controllers.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

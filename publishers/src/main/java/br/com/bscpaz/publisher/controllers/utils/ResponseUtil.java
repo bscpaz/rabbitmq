@@ -3,7 +3,7 @@ package br.com.bscpaz.publisher.controllers.utils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import br.com.bscpaz.publisher.controllers.v1.dtos.ResponseDTO;
+import br.com.bscpaz.publisher.controllers.dtos.ResponseDTO;
 
 public class ResponseUtil {
     
