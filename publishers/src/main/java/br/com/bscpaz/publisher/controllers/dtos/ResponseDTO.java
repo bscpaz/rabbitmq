@@ -14,19 +14,19 @@ public class ResponseDTO<T> {
 
     private String message;
 
-    private T result;
+    private T payload;
 
     public ResponseDTO() {
     }
 
     public ResponseDTO(boolean isSuccess, T t) {
         this.isSuccess = isSuccess;
-        this.result = t;
+        this.payload = t;
     }
 
     public ResponseDTO(boolean isSuccess, String message, T t) {
         this.isSuccess = isSuccess;
         this.message = message;
-        this.result = t;
+        this.payload = t;
     }
 }
