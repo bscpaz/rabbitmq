@@ -22,6 +22,14 @@ _A fanout exchange routes messages to all of the queues that are bound to it and
 #### Direct Exchange
 _A direct exchange delivers messages to queues based on the message routing key. A direct exchange is ideal for the unicast routing of messages._
 
+### Queues
+
+*Quorum queues and streams now replace the original, replicated mirrored classic queue. Mirrored classic queues are now deprecated and scheduled for removal. Use the Migrate your RabbitMQ Mirrored Classic Queues to Quorum Queues guide for migrating RabbitMQ installations that currently use classic mirrored queues.*
+
+*Quorum queues are optimized for set of use cases where data safety is a top priority. This is covered in Motivation. Quorum queues should be considered the default option for a replicated queue type.*
+
+https://www.rabbitmq.com/migrate-mcq-to-qq.html
+
 ### Ensuring delivery guarantee
 When it comes to ensuring guaranteed delivery, it is crucial not to rely on auto ack = true if we aim to ensure resilience in our systems.
 
