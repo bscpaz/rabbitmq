@@ -30,6 +30,18 @@ _A direct exchange delivers messages to queues based on the message routing key.
 
 https://www.rabbitmq.com/migrate-mcq-to-qq.html
 
+#### Classic Queues
+These queues work as follows: they have a primary queue on one of the nodes in the cluster, and mirroring occurs on one or more members of this cluster. Messages published to the queue first go to the primary node and then are replicated to the mirrors. If something happens to the primary node, the oldest synchronized mirror will be promoted to primary.
+
+#### Quorum Queues
+These queues work as follows: they have a primary queue on one of the nodes in the cluster, and mirroring occurs on one or more members of this cluster. Messages published to the queue first go to the primary node and then are replicated to the mirrors. If something happens to the primary node, the oldest synchronized mirror will be promoted to primary.
+
+One of the major issues mentioned is that when one of the instances goes offline and then comes back online, the scattered data is lost. At this point, a decision needs to be made whether to synchronize again and retrieve the queues and messages from the primary node or not. Opting to resynchronize the queues and messages results in unavailability of the primary queue during this synchronization period, as the synchronization process is blocking.
+
+To address these issues, starting from RabbitMQ version 3.8, quorum queues were introduced, known as "quorum queues," utilizing the Raft consensus algorithm. This was done to provide enhanced performance compared to mirrored queues, while ensuring message integrity. In this approach, a minimum quorum of replicas that must be available is established.
+
+Considering three nodes that store the data, if two of these nodes become unavailable, the queue will also become inaccessible to clients, as it won't meet the minimum replica requirement for replication and safeguarding of messages. When a producer publishes a message, the queue only acknowledges receipt when the majority of replicas confirm that they have received and stored the data on disk.
+
 ### Ensuring delivery guarantee
 When it comes to ensuring guaranteed delivery, it is crucial not to rely on auto ack = true if we aim to ensure resilience in our systems.
 
